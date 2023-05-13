@@ -9,14 +9,12 @@ displayName="FTBChecker"
 #updateJSONURL="https://change.me.example.invalid/updates.json"
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
 #logoFile="examplemod.png"
-credits="Thanks for this example mod goes to Java"
+credits="Special thanks to the creators of the FTB mods (FTB Chunks, FTB Library, FTB Quests, and FTB Teams) for their amazing work, as well as the Minecraft Forge team for providing the tools to create this mod."
 authors="SajmonOriginal"
 description='''
-This is a long form description of the mod. You can write whatever you want here
+FTB Checker is a mod that ensures the presence of FTB mods (FTB Chunks, FTB Library, FTB Quests, and FTB Teams) in your modpack. If any of these mods are missing, a warning screen will be displayed before entering the main menu, providing download links for the missing mods.
 
-Have some lorem ipsum.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sagittis luctus odio eu tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat ligula eget lacus auctor sagittis. In hac habitasse platea dictumst. Nunc gravida elit vitae sem vehicula efficitur. Donec mattis ipsum et arcu lobortis, eleifend sagittis sem rutrum. Cras pharetra quam eget posuere fermentum. Sed id tincidunt justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+This mod is designed for modpack creators who want to use FTB mods and have their modpacks on the Modrinth platform. Due to licensing restrictions, FTB mods cannot be used on Modrinth directly.
 '''
 [[dependencies.ftbchecker]]
 modId="forge"
