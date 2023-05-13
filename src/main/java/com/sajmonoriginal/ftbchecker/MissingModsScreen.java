@@ -1,4 +1,4 @@
-package com.example.dependencycheckermod;
+package com.sajmonoriginal.ftbchecker;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;

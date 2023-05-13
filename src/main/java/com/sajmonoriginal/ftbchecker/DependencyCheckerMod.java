@@ -1,4 +1,4 @@
-package com.example.dependencycheckermod;
+package com.sajmonoriginal.ftbchecker;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -13,7 +13,7 @@ import net.minecraftforge.client.event.ScreenEvent;
 
 @Mod(DependencyCheckerMod.MOD_ID)
 public class DependencyCheckerMod {
-    public static final String MOD_ID = "dependencycheckermod";
+    public static final String MOD_ID = "ftbchecker";
 
     public DependencyCheckerMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
