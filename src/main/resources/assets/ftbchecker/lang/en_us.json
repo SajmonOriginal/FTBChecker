@@ -1,0 +1,21 @@
+{
+    "text.autoconfig.ftbchecker.title": "FTBChecker",
+
+    "text.autoconfig.ftbchecker.option.chunks": "Check for FTB Chunks",
+    "text.autoconfig.ftbchecker.option.base": "Check for FTB Library",
+    "text.autoconfig.ftbchecker.option.quests": "Check for FTB Quests",
+    "text.autoconfig.ftbchecker.option.teams": "Check for FTB Teams",
+    "text.autoconfig.ftbchecker.option.essentials": "Check for FTB Essentials",
+    "text.autoconfig.ftbchecker.option.ultimine": "Check for FTB Ultimine",
+    "text.autoconfig.ftbchecker.option.backups": "Check for FTB Backups 2",
+
+    "text.autoconfig.ftbchecker.option.versions": "Versions",
+
+    "text.autoconfig.ftbchecker.option.versions.chunksVersion": "FTB Chunks' CurseForge version ID",
+    "text.autoconfig.ftbchecker.option.versions.baseVersion": "FTB Library's CurseForge version ID",
+    "text.autoconfig.ftbchecker.option.versions.questsVersion": "FTB Quests' CurseForge version ID",
+    "text.autoconfig.ftbchecker.option.versions.teamsVersion": "FTB Teams' CurseForge version ID",
+    "text.autoconfig.ftbchecker.option.versions.essentialsVersion": "FTB Essentials' CurseForge version ID",
+    "text.autoconfig.ftbchecker.option.versions.ultimineVersion": "FTB Ultimine's CurseForge version ID",
+    "text.autoconfig.ftbchecker.option.versions.backupsVersion": "FTB Backups 2's CurseForge version ID"
+}
