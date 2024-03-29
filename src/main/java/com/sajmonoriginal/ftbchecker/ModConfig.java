@@ -13,6 +13,7 @@ public class ModConfig implements ConfigData {
     public boolean essentials = true;
     public boolean ultimine = true;
     public boolean backups = true;
+    public boolean polyLib = true;
 
     @ConfigEntry.Gui.CollapsibleObject
     Versions versions = new Versions();
@@ -25,5 +26,6 @@ public class ModConfig implements ConfigData {
         public String essentialsVersion = "4896152";
         public String ultimineVersion = "5005006";
         public String backupsVersion = "4834403";
+        public String polyLibVersion = "5218944";
     }
 }

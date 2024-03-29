@@ -58,6 +58,7 @@ public class FTBChecker {
                 || (!ModList.get().isLoaded("ftbteams") && CONFIG.teams)
                 || (!ModList.get().isLoaded("ftbessentials") && CONFIG.essentials)
                 || (!ModList.get().isLoaded("ftbultimine") && CONFIG.ultimine)
-                || (!ModList.get().isLoaded("ftbbackups2") && CONFIG.backups);
+                || (!ModList.get().isLoaded("ftbbackups2") && CONFIG.backups)
+                || (!ModList.get().isLoaded("polylib") && CONFIG.polyLib);
     }
 }

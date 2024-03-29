@@ -110,6 +110,9 @@ public class MissingModsScreen extends Screen {
         if (FTBChecker.CONFIG.backups && !ModList.get().isLoaded("ftbbackups2"))
             mods.put("FTB Backups 2", "https://www.curseforge.com/minecraft/mc-mods/ftb-backups-2/download/" + FTBChecker.CONFIG.versions.backupsVersion);
 
+        if (FTBChecker.CONFIG.polyLib && !ModList.get().isLoaded("polylib"))
+            mods.put("FTB Backups 2", "https://www.curseforge.com/minecraft/mc-mods/polylib/download/" + FTBChecker.CONFIG.versions.polyLibVersion);
+
         return mods;
     }
 
