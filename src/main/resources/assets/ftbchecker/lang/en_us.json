@@ -9,6 +9,8 @@
     "text.autoconfig.ftbchecker.option.ultimine": "Check for FTB Ultimine",
     "text.autoconfig.ftbchecker.option.backups": "Check for FTB Backups 2",
     "text.autoconfig.ftbchecker.option.polyLib": "Check for PolyLib",
+    "text.autoconfig.ftbchecker.option.xmod": "Check for FTB XMod Compat",
+    "text.autoconfig.ftbchecker.option.filters": "Check for Item Filters",
 
     "text.autoconfig.ftbchecker.option.versions": "Versions",
 
@@ -19,5 +21,7 @@
     "text.autoconfig.ftbchecker.option.versions.essentialsVersion": "FTB Essentials' CurseForge version ID",
     "text.autoconfig.ftbchecker.option.versions.ultimineVersion": "FTB Ultimine's CurseForge version ID",
     "text.autoconfig.ftbchecker.option.versions.backupsVersion": "FTB Backups 2's CurseForge version ID",
-    "text.autoconfig.ftbchecker.option.versions.polyLibVersion": "PolyLib's CurseForge version ID"
+    "text.autoconfig.ftbchecker.option.versions.polyLibVersion": "PolyLib's CurseForge version ID",
+    "text.autoconfig.ftbchecker.option.versions.xmodVersion": "FTB XMod Compat's CurseForge version ID",
+    "text.autoconfig.ftbchecker.option.versions.filtersVersion": "Item Filters' CurseForge version ID"
 }
