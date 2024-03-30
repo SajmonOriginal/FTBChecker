@@ -111,7 +111,13 @@ public class MissingModsScreen extends Screen {
             mods.put("FTB Backups 2", "https://www.curseforge.com/minecraft/mc-mods/ftb-backups-2/download/" + FTBChecker.CONFIG.versions.backupsVersion);
 
         if (FTBChecker.CONFIG.polyLib && !ModList.get().isLoaded("polylib"))
-            mods.put("FTB Backups 2", "https://www.curseforge.com/minecraft/mc-mods/polylib/download/" + FTBChecker.CONFIG.versions.polyLibVersion);
+            mods.put("PolyLib", "https://www.curseforge.com/minecraft/mc-mods/polylib/download/" + FTBChecker.CONFIG.versions.polyLibVersion);
+
+        if (FTBChecker.CONFIG.xmod && !ModList.get().isLoaded("ftbxmodcompat"))
+            mods.put("FTB XMod Compat", "https://www.curseforge.com/minecraft/mc-mods/ftb-xmod-compat/download/" + FTBChecker.CONFIG.versions.xmodVersion);
+
+        if (FTBChecker.CONFIG.filters && !ModList.get().isLoaded("itemfilters"))
+            mods.put("Item Filters", "https://www.curseforge.com/minecraft/mc-mods/item-filters/download/" + FTBChecker.CONFIG.versions.filtersVersion);
 
         return mods;
     }
