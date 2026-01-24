@@ -11,9 +11,7 @@ credits="Special thanks to the creators of the FTB mods (FTB Chunks, FTB Library
 authors="${mod_authors}"
 
 description='''
-FTB Checker is a mod that ensures the presence of FTB mods (FTB Chunks, FTB Library, FTB Quests, and FTB Teams) in your modpack. If any of these mods are missing, a warning screen will be displayed before entering the main menu, providing download links for the missing mods.
-
-This mod is designed for modpack creators who want to use FTB mods and have their modpacks on the Modrinth platform. Due to licensing restrictions, FTB mods cannot be used on Modrinth directly.
+Checks for required mods on startup and shows download links for any that are missing. Pre-configured with FTB mods but can check for any mod.
 '''
 
 [[dependencies.${mod_id}]]

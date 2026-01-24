@@ -1,31 +1,51 @@
 # FTBChecker
 
-FTBChecker is a Minecraft NeoForge mod designed to simplify modpack publishing on Modrinth by resolving licensing issues. It ensures the presence of key FTB mods, such as FTBChunks, FTB Library, and FTB Quests.
+A simple mod that checks for required mods on startup and shows download links for any that are missing.
 
-## Features
-- Automatically checks for the presence of FTB mods in the Minecraft client.
-- Displays a screen with download links for missing mods upon launch.
-- Facilitates the inclusion of FTB mods in modpacks for hassle-free publishing on Modrinth.
-- Support for custom mods - require any mod in your modpack.
+Comes pre-configured with FTB mods (Chunks, Library, Quests, Teams, Ultimine, Backups) but can be configured to check for any mod.
 
-## Installation
-1. Download the latest release of FTBChecker from the [Releases](https://github.com/SajmonOriginal/FTBChecker/releases) page.
-2. Place the downloaded `.jar` file into the `mods` folder of your Minecraft installation directory.
-3. Launch Minecraft with the NeoForge profile.
+![Missing Mods Screen](https://i.imgur.com/placeholder.png)
 
-## Configuration
+## 📦 Supported Platforms
 
-Config file location: `config/ftbchecker.toml`
+| Platform | Minecraft | Branch |
+|----------|-----------|--------|
+| NeoForge | 1.21.1 | `main` |
+| Fabric | 1.21.1 | `fabric` |
+| Fabric | 1.19.2 | `fabric-1.19.2` |
+| Quilt | 1.21.0 | `quilt` |
 
-### Adding Custom Mods
+## ✨ Features
 
-You can require any mod by adding entries to the `customMods.mods` list. Each entry uses this format:
+- 🔍 Checks for mods on game startup
+- 📋 Shows a screen with direct download links for missing mods
+- ⚙️ Fully configurable - enable/disable individual checks
+- ➕ Add custom mods to check for
+- 📦 All dependencies bundled - just drop in and go
 
+## 📥 Installation
+
+1. Download from [Releases](https://github.com/SajmonOriginal/FTBChecker/releases)
+2. Drop the `.jar` into your `mods` folder
+3. Done!
+
+## ⚙️ Configuration
+
+Config file: `config/ftbchecker.toml`
+
+### Enable/Disable Mod Checks
+
+```toml
+chunks = true
+base = true
+quests = true
+teams = true
+ultimine = false
+backups = false
 ```
-modId|Display Name|Download URL
-```
 
-**Example config:**
+### Add Custom Mods
+
 ```toml
 [customMods]
 mods = [
@@ -34,34 +54,14 @@ mods = [
 ]
 ```
 
-### Finding the CurseForge File ID
+Format: `modId|Display Name|Download URL`
 
-1. Go to the mod's CurseForge page
-2. Click on the "Files" tab
-3. Find the version you want
-4. Click on the file - the ID is in the URL (e.g., `.../download/5101366`)
+> 💡 **Tip:** Find the CurseForge file ID in the download URL (e.g., `.../download/5101366`)
 
-### Disabling FTB Mod Checks
+## 📄 License
 
-You can disable individual FTB mod checks by setting them to `false`:
+[MIT License](LICENSE)
 
-```toml
-chunks = false
-base = true
-quests = true
-# ... etc
-```
+## ⚠️ Disclaimer
 
-## License
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-## Contributing
-Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
-
-## Credits
-FTBChecker is developed and maintained by [SajmonOriginal](https://github.com/SajmonOriginal).
-
-## Disclaimer
-FTBChecker is not affiliated with or endorsed by FTB (Feed The Beast) or Modrinth.
-
-Enjoy using FTBChecker and happy modpack publishing!
+FTBChecker is not affiliated with or endorsed by FTB (Feed The Beast).
