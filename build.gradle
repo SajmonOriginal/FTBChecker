@@ -66,11 +66,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly "me.shedaniel.cloth:cloth-config-neoforge:15.0.130"
-    runtimeOnly "me.shedaniel.cloth:cloth-config-neoforge:15.0.130"
-
-    // This can't just be a JAR in a dev environment, it'll break the mixins.
-    runtimeOnly "dev.architectury:architectury-neoforge:13.0.8"
+    implementation "me.shedaniel.cloth:cloth-config-neoforge:15.0.130"
+    jarJar("me.shedaniel.cloth:cloth-config-neoforge:[15.0.130,)") {
+        version { prefer "15.0.130" }
+    }
 }
 
 tasks.withType(ProcessResources).configureEach {
