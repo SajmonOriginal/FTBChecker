@@ -19,13 +19,13 @@ public class ModConfig implements ConfigData {
     Versions versions = new Versions();
 
     public static class Versions {
-        public String chunksVersion = "5210496";
-        public String baseVersion = "5051953";
-        public String questsVersion = "5192381";
-        public String teamsVersion = "5176343";
-        public String essentialsVersion = "4896152";
-        public String ultimineVersion = "5005006";
-        public String backupsVersion = "4834403";
-        public String polyLibVersion = "5218944";
+        public String chunksVersion = "5598952";
+        public String baseVersion = "5583834";
+        public String questsVersion = "5543248";
+        public String teamsVersion = "5448371";
+        public String essentialsVersion = "5443860";
+        public String ultimineVersion = "5448787";
+        public String backupsVersion = "5859579";
+        public String polyLibVersion = "7140477";
     }
 }
