@@ -4,7 +4,7 @@ A simple mod that checks for required mods on startup and shows download links f
 
 Comes pre-configured with FTB mods (Chunks, Library, Quests, Teams, Ultimine, Backups) but can be configured to check for any mod.
 
-![Missing Mods Screen](https://i.imgur.com/placeholder.png)
+![Missing Mods Screen](https://i.imgur.com/LJZVfmG.png)
 
 ## 📦 Supported Platforms
 
