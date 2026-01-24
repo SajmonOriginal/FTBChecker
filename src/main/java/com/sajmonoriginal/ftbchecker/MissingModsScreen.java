@@ -1,9 +1,9 @@
 package com.sajmonoriginal.ftbchecker;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 
@@ -39,31 +39,28 @@ public class MissingModsScreen extends Screen {
 
         int downloadAllButtonY = modButtonY + modButtonSpacing * buttons + 10;
 
-        addDrawableChild(
-                ButtonWidget.builder(
-                        Text.literal("Download All"),
-                        button -> openDownloadPages()
-                ).dimensions(
-                        centerX - buttonWidth / 2,
-                        downloadAllButtonY,
-                        buttonWidth,
-                        buttonHeight
-                ).build()
-        );
+        addDrawableChild(new ButtonWidget(
+                centerX - buttonWidth / 2,
+                downloadAllButtonY,
+                buttonWidth,
+                buttonHeight,
+                Text.literal("Download All"),
+                button -> openDownloadPages()
+        ));
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        renderBackground(context, mouseX, mouseY, delta);
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        renderBackground(matrices);
 
-        super.render(context, mouseX, mouseY, delta);
+        super.render(matrices, mouseX, mouseY, delta);
 
         int centerX = this.width / 2;
         int titleY = 10;
         int subtitleY = titleY + 15;
 
-        context.drawCenteredTextWithShadow(textRenderer, titleText, centerX, titleY, 16777215);
-        context.drawCenteredTextWithShadow(textRenderer, subtitleText, centerX, subtitleY, 16777215);
+        drawCenteredText(matrices, textRenderer, titleText, centerX, titleY, 16777215);
+        drawCenteredText(matrices, textRenderer, subtitleText, centerX, subtitleY, 16777215);
     }
 
     @Override
@@ -117,7 +114,7 @@ public class MissingModsScreen extends Screen {
         int buttonWidth = 200;
         int buttonHeight = 20;
 
-        addDrawableChild(ButtonWidget.builder(Text.literal(modName), button -> openWebPage(downloadLink)).dimensions(x, y, buttonWidth, buttonHeight).build());
+        addDrawableChild(new ButtonWidget(x, y, buttonWidth, buttonHeight, Text.literal(modName), button -> openWebPage(downloadLink)));
     }
 
     @SuppressWarnings("CallToPrintStackTrace")

@@ -22,14 +22,15 @@ public class ModConfig implements ConfigData {
     public Versions versions = new Versions();
 
     public static class Versions {
-        public String architecturyVersion = "5786326";
-        public String chunksVersion = "7157144";
-        public String baseVersion = "7420411";
-        public String questsVersion = "7429015";
-        public String teamsVersion = "7369020";
-        public String ultimineVersion = "7188393";
-        public String backupsVersion = "5501350";
-        public String polyLibVersion = "7140476";
+        // MC 1.19.2 compatible versions (Fabric)
+        public String architecturyVersion = "5084403";  // [Fabric 1.19.2] v6.5.90
+        public String chunksVersion = "5710629";        // [Fabric][1.19.2] FTB Chunks 1902.4.7
+        public String baseVersion = "4661833";          // [Fabric][1.19.2] FTB Library 1902.4.1
+        public String questsVersion = "5417955";        // [Fabric][1.19.2] FTB Quests 1902.5.9
+        public String teamsVersion = "4477313";         // [Fabric][1.19.2] FTB Teams 1902.2.13
+        public String ultimineVersion = "4598467";      // [Fabric][1.19.2] FTB Ultimine 1902.4.1
+        public String backupsVersion = "4407012";       // FTB Backups 2 - 1.0.19
+        public String polyLibVersion = "4346098";       // PolyLib 1900.0.2-build.73
     }
 
     @ConfigEntry.Gui.CollapsibleObject
