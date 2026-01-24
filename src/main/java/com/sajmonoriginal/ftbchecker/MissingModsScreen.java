@@ -1,12 +1,11 @@
 package com.sajmonoriginal.ftbchecker;
 
-import net.minecraft.Util;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
-import net.neoforged.fml.ModList;
-import org.jetbrains.annotations.NotNull;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.text.Text;
+import net.minecraft.util.Util;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -14,11 +13,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MissingModsScreen extends Screen {
-    private final Component titleText = Component.literal("You're missing mods!");
-    private final Component subtitleText = Component.literal("Click to download:");
+    private final Text titleText = Text.literal("You're missing mods!");
+    private final Text subtitleText = Text.literal("Click to download:");
 
     public MissingModsScreen() {
-        super(Component.literal("Missing Mods"));
+        super(Text.literal("Missing Mods"));
     }
 
     @Override
@@ -40,11 +39,11 @@ public class MissingModsScreen extends Screen {
 
         int downloadAllButtonY = modButtonY + modButtonSpacing * buttons + 10;
 
-        addRenderableWidget(
-                Button.builder(
-                        Component.literal("Download All"),
+        addDrawableChild(
+                ButtonWidget.builder(
+                        Text.literal("Download All"),
                         button -> openDownloadPages()
-                ).bounds(
+                ).dimensions(
                         centerX - buttonWidth / 2,
                         downloadAllButtonY,
                         buttonWidth,
@@ -54,17 +53,17 @@ public class MissingModsScreen extends Screen {
     }
 
     @Override
-    public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        renderBackground(graphics, mouseX, mouseY, delta);
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        renderBackground(context, mouseX, mouseY, delta);
 
-        super.render(graphics, mouseX, mouseY, delta);
+        super.render(context, mouseX, mouseY, delta);
 
         int centerX = this.width / 2;
         int titleY = 10;
         int subtitleY = titleY + 15;
 
-        graphics.drawCenteredString(font, titleText, centerX, titleY, 16777215);
-        graphics.drawCenteredString(font, subtitleText, centerX, subtitleY, 16777215);
+        context.drawCenteredTextWithShadow(textRenderer, titleText, centerX, titleY, 16777215);
+        context.drawCenteredTextWithShadow(textRenderer, subtitleText, centerX, subtitleY, 16777215);
     }
 
     @Override
@@ -75,37 +74,37 @@ public class MissingModsScreen extends Screen {
     private Map<String, String> getMods() {
         Map<String, String> mods = new LinkedHashMap<>();
 
-        if (FTBChecker.CONFIG.chunks && !ModList.get().isLoaded("ftbchunks"))
-            mods.put("FTB Chunks", "https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge/download/" + FTBChecker.CONFIG.versions.chunksVersion);
+        if (FTBCheckerClient.CONFIG.architectury && !FabricLoader.getInstance().isModLoaded("architectury"))
+            mods.put("Architectury API", "https://www.curseforge.com/minecraft/mc-mods/architectury-api/download/" + FTBCheckerClient.CONFIG.versions.architecturyVersion);
 
-        if (FTBChecker.CONFIG.base && !ModList.get().isLoaded("ftblibrary"))
-            mods.put("FTB Library", "https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge/download/" + FTBChecker.CONFIG.versions.baseVersion);
+        if (FTBCheckerClient.CONFIG.chunks && !FabricLoader.getInstance().isModLoaded("ftbchunks"))
+            mods.put("FTB Chunks", "https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-fabric/download/" + FTBCheckerClient.CONFIG.versions.chunksVersion);
 
-        if (FTBChecker.CONFIG.quests && !ModList.get().isLoaded("ftbquests"))
-            mods.put("FTB Quests", "https://www.curseforge.com/minecraft/mc-mods/ftb-quests-forge/download/" + FTBChecker.CONFIG.versions.questsVersion);
+        if (FTBCheckerClient.CONFIG.base && !FabricLoader.getInstance().isModLoaded("ftblibrary"))
+            mods.put("FTB Library", "https://www.curseforge.com/minecraft/mc-mods/ftb-library-fabric/download/" + FTBCheckerClient.CONFIG.versions.baseVersion);
 
-        if (FTBChecker.CONFIG.teams && !ModList.get().isLoaded("ftbteams"))
-            mods.put("FTB Teams", "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-forge/download/" + FTBChecker.CONFIG.versions.teamsVersion);
+        if (FTBCheckerClient.CONFIG.quests && !FabricLoader.getInstance().isModLoaded("ftbquests"))
+            mods.put("FTB Quests", "https://www.curseforge.com/minecraft/mc-mods/ftb-quests-fabric/download/" + FTBCheckerClient.CONFIG.versions.questsVersion);
 
-        if (FTBChecker.CONFIG.essentials && !ModList.get().isLoaded("ftbessentials"))
-            mods.put("FTB Essentials", "https://www.curseforge.com/minecraft/mc-mods/ftb-essentials-forge/download/" + FTBChecker.CONFIG.versions.essentialsVersion);
+        if (FTBCheckerClient.CONFIG.teams && !FabricLoader.getInstance().isModLoaded("ftbteams"))
+            mods.put("FTB Teams", "https://www.curseforge.com/minecraft/mc-mods/ftb-teams-fabric/download/" + FTBCheckerClient.CONFIG.versions.teamsVersion);
 
-        if (FTBChecker.CONFIG.ultimine && !ModList.get().isLoaded("ftbultimine"))
-            mods.put("FTB Ultimine", "https://www.curseforge.com/minecraft/mc-mods/ftb-ultimine-forge/download/" + FTBChecker.CONFIG.versions.ultimineVersion);
+        if (FTBCheckerClient.CONFIG.ultimine && !FabricLoader.getInstance().isModLoaded("ftbultimine"))
+            mods.put("FTB Ultimine", "https://www.curseforge.com/minecraft/mc-mods/ftb-ultimine-fabric/download/" + FTBCheckerClient.CONFIG.versions.ultimineVersion);
 
-        if (FTBChecker.CONFIG.backups && !ModList.get().isLoaded("ftbbackups2"))
-            mods.put("FTB Backups 2", "https://www.curseforge.com/minecraft/mc-mods/ftb-backups-2/download/" + FTBChecker.CONFIG.versions.backupsVersion);
+        if (FTBCheckerClient.CONFIG.backups && !FabricLoader.getInstance().isModLoaded("ftbbackups2"))
+            mods.put("FTB Backups 2", "https://www.curseforge.com/minecraft/mc-mods/ftb-backups-2/download/" + FTBCheckerClient.CONFIG.versions.backupsVersion);
 
-        if (FTBChecker.CONFIG.polyLib && !ModList.get().isLoaded("polylib"))
-            mods.put("PolyLib", "https://www.curseforge.com/minecraft/mc-mods/polylib/download/" + FTBChecker.CONFIG.versions.polyLibVersion);
+        if (FTBCheckerClient.CONFIG.polyLib && !FabricLoader.getInstance().isModLoaded("polylib"))
+            mods.put("PolyLib", "https://www.curseforge.com/minecraft/mc-mods/polylib/download/" + FTBCheckerClient.CONFIG.versions.polyLibVersion);
 
-        for (String modEntry : FTBChecker.CONFIG.customMods.mods) {
+        for (String modEntry : FTBCheckerClient.CONFIG.customMods.mods) {
             String[] parts = modEntry.split("\\|", 3);
             if (parts.length >= 3) {
                 String modId = parts[0].trim();
                 String displayName = parts[1].trim();
                 String downloadUrl = parts[2].trim();
-                if (!modId.isEmpty() && !ModList.get().isLoaded(modId)) {
+                if (!modId.isEmpty() && !FabricLoader.getInstance().isModLoaded(modId)) {
                     mods.put(displayName, downloadUrl);
                 }
             }
@@ -118,13 +117,13 @@ public class MissingModsScreen extends Screen {
         int buttonWidth = 200;
         int buttonHeight = 20;
 
-        addRenderableWidget(new Button.Builder(Component.literal(modName), button -> openWebPage(downloadLink)).bounds(x, y, buttonWidth, buttonHeight).build());
+        addDrawableChild(ButtonWidget.builder(Text.literal(modName), button -> openWebPage(downloadLink)).dimensions(x, y, buttonWidth, buttonHeight).build());
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
     private void openWebPage(String url) {
         try {
-            Util.getPlatform().openUri(new URI(url));
+            Util.getOperatingSystem().open(new URI(url));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

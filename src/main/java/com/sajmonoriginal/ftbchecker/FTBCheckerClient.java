@@ -1,43 +1,38 @@
 package com.sajmonoriginal.ftbchecker;
 
 import me.shedaniel.autoconfig.AutoConfig;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.TitleScreen;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.client.event.ScreenEvent;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.TitleScreen;
 
-import static com.sajmonoriginal.ftbchecker.FTBChecker.CONFIG;
+public class FTBCheckerClient implements ClientModInitializer {
+    public static final String MOD_ID = "ftbchecker";
+    public static ModConfig CONFIG;
 
-@Mod(value = FTBChecker.MOD_ID, dist = Dist.CLIENT)
-@EventBusSubscriber(modid = FTBChecker.MOD_ID, value = Dist.CLIENT)
-public class FTBCheckerClient {
-    public FTBCheckerClient(ModContainer container) {
-        container.registerExtensionPoint(IConfigScreenFactory.class, (client, parent) ->
-                AutoConfig.getConfigScreen(ModConfig.class, parent).get());
+    @Override
+    public void onInitializeClient() {
+        AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
+        CONFIG = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
+
+        ScreenEvents.AFTER_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
+            if (screen instanceof TitleScreen && areDependenciesMissing()) {
+                MinecraftClient.getInstance().setScreen(new MissingModsScreen());
+            }
+        });
     }
 
-    @SubscribeEvent
-    static void onInitScreenEventPost(ScreenEvent.Init.Post event) {
-        if (event.getScreen() instanceof TitleScreen && areDependenciesMissing()) {
-            Minecraft.getInstance().setScreen(new MissingModsScreen());
-        }
-    }
-
-    private static boolean areDependenciesMissing() {
-        if ((!ModList.get().isLoaded("ftbchunks") && CONFIG.chunks)
-                || (!ModList.get().isLoaded("ftblibrary") && CONFIG.base)
-                || (!ModList.get().isLoaded("ftbquests") && CONFIG.quests)
-                || (!ModList.get().isLoaded("ftbteams") && CONFIG.teams)
-                || (!ModList.get().isLoaded("ftbessentials") && CONFIG.essentials)
-                || (!ModList.get().isLoaded("ftbultimine") && CONFIG.ultimine)
-                || (!ModList.get().isLoaded("ftbbackups2") && CONFIG.backups)
-                || (!ModList.get().isLoaded("polylib") && CONFIG.polyLib)) {
+    private boolean areDependenciesMissing() {
+        if ((CONFIG.architectury && !FabricLoader.getInstance().isModLoaded("architectury"))
+                || (CONFIG.chunks && !FabricLoader.getInstance().isModLoaded("ftbchunks"))
+                || (CONFIG.base && !FabricLoader.getInstance().isModLoaded("ftblibrary"))
+                || (CONFIG.quests && !FabricLoader.getInstance().isModLoaded("ftbquests"))
+                || (CONFIG.teams && !FabricLoader.getInstance().isModLoaded("ftbteams"))
+                || (CONFIG.ultimine && !FabricLoader.getInstance().isModLoaded("ftbultimine"))
+                || (CONFIG.backups && !FabricLoader.getInstance().isModLoaded("ftbbackups2"))
+                || (CONFIG.polyLib && !FabricLoader.getInstance().isModLoaded("polylib"))) {
             return true;
         }
 
@@ -45,7 +40,7 @@ public class FTBCheckerClient {
             String[] parts = modEntry.split("\\|", 3);
             if (parts.length >= 1) {
                 String modId = parts[0].trim();
-                if (!modId.isEmpty() && !ModList.get().isLoaded(modId)) {
+                if (!modId.isEmpty() && !FabricLoader.getInstance().isModLoaded(modId)) {
                     return true;
                 }
             }
