@@ -6,10 +6,9 @@
     "version": "${version}",
     "metadata": {
       "name": "FTBChecker",
-      "description": "Ensures the presence of FTB mods in your modpack. Displays download links for missing mods.",
+      "description": "Checks for required mods on startup and shows download links for any that are missing. Pre-configured with FTB mods but can check for any mod.",
       "contributors": {
-        "SajmonOriginal": "Developer",
-        "RedstoneWizard08": "Developer"
+        "SajmonOriginal": "Developer"
       },
       "contact": {
         "homepage": "https://github.com/SajmonOriginal/FTBChecker",
