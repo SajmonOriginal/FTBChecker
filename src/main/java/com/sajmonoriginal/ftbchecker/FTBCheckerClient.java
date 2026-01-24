@@ -13,7 +13,6 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 import static com.sajmonoriginal.ftbchecker.FTBChecker.CONFIG;
-import static com.sajmonoriginal.ftbchecker.FTBChecker.IGNORED;
 
 @Mod(value = FTBChecker.MOD_ID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = FTBChecker.MOD_ID, value = Dist.CLIENT)
@@ -25,19 +24,33 @@ public class FTBCheckerClient {
 
     @SubscribeEvent
     static void onInitScreenEventPost(ScreenEvent.Init.Post event) {
-        if (event.getScreen() instanceof TitleScreen && areDependenciesMissing() && !IGNORED) {
+        if (event.getScreen() instanceof TitleScreen && areDependenciesMissing()) {
             Minecraft.getInstance().setScreen(new MissingModsScreen());
         }
     }
 
     private static boolean areDependenciesMissing() {
-        return (!ModList.get().isLoaded("ftbchunks") && CONFIG.chunks)
+        if ((!ModList.get().isLoaded("ftbchunks") && CONFIG.chunks)
                 || (!ModList.get().isLoaded("ftblibrary") && CONFIG.base)
                 || (!ModList.get().isLoaded("ftbquests") && CONFIG.quests)
                 || (!ModList.get().isLoaded("ftbteams") && CONFIG.teams)
                 || (!ModList.get().isLoaded("ftbessentials") && CONFIG.essentials)
                 || (!ModList.get().isLoaded("ftbultimine") && CONFIG.ultimine)
                 || (!ModList.get().isLoaded("ftbbackups2") && CONFIG.backups)
-                || (!ModList.get().isLoaded("polylib") && CONFIG.polyLib);
+                || (!ModList.get().isLoaded("polylib") && CONFIG.polyLib)) {
+            return true;
+        }
+
+        for (String modEntry : CONFIG.customMods.mods) {
+            String[] parts = modEntry.split("\\|", 3);
+            if (parts.length >= 1) {
+                String modId = parts[0].trim();
+                if (!modId.isEmpty() && !ModList.get().isLoaded(modId)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

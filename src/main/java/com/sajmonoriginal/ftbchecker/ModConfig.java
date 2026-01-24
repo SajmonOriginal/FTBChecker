@@ -4,6 +4,9 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Config(name = FTBChecker.MOD_ID)
 public class ModConfig implements ConfigData {
     public boolean chunks = true;
@@ -16,7 +19,7 @@ public class ModConfig implements ConfigData {
     public boolean polyLib = true;
 
     @ConfigEntry.Gui.CollapsibleObject
-    Versions versions = new Versions();
+    public Versions versions = new Versions();
 
     public static class Versions {
         public String chunksVersion = "5598952";
@@ -27,5 +30,12 @@ public class ModConfig implements ConfigData {
         public String ultimineVersion = "5448787";
         public String backupsVersion = "5859579";
         public String polyLibVersion = "7140477";
+    }
+
+    @ConfigEntry.Gui.CollapsibleObject
+    public CustomMods customMods = new CustomMods();
+
+    public static class CustomMods {
+        public List<String> mods = new ArrayList<>();
     }
 }

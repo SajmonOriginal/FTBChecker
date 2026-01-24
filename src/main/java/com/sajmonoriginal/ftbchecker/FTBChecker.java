@@ -9,7 +9,6 @@ public class FTBChecker {
     public static final String MOD_ID = "ftbchecker";
 
     public static ModConfig CONFIG;
-    public static boolean IGNORED = false;
 
     public FTBChecker() {
         AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);

@@ -1,18 +1,16 @@
 package com.sajmonoriginal.ftbchecker;
 
 import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
 import net.neoforged.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MissingModsScreen extends Screen {
@@ -30,7 +28,6 @@ public class MissingModsScreen extends Screen {
         int buttonWidth = 200;
         int buttonHeight = 20;
 
-        // Buttons for individual mods
         int modButtonY = topTextY + 45;
         int modButtonSpacing = 25;
 
@@ -41,9 +38,7 @@ public class MissingModsScreen extends Screen {
             buttons++;
         }
 
-        // Button for downloading all mods
         int downloadAllButtonY = modButtonY + modButtonSpacing * buttons + 10;
-        int gap = 8;
 
         addRenderableWidget(
                 Button.builder(
@@ -52,19 +47,7 @@ public class MissingModsScreen extends Screen {
                 ).bounds(
                         centerX - buttonWidth / 2,
                         downloadAllButtonY,
-                        buttonWidth / 2 - gap / 2,
-                        buttonHeight
-                ).build()
-        );
-
-        addRenderableWidget(
-                Button.builder(
-                        Component.literal("Ignore"),
-                        button -> exit()
-                ).bounds(
-                        centerX + gap / 2,
-                        downloadAllButtonY,
-                        buttonWidth / 2 - gap / 2,
+                        buttonWidth,
                         buttonHeight
                 ).build()
         );
@@ -76,7 +59,6 @@ public class MissingModsScreen extends Screen {
 
         super.render(graphics, mouseX, mouseY, delta);
 
-        // Render missing mods text
         int centerX = this.width / 2;
         int titleY = 10;
         int subtitleY = titleY + 15;
@@ -85,9 +67,13 @@ public class MissingModsScreen extends Screen {
         graphics.drawCenteredString(font, subtitleText, centerX, subtitleY, 16777215);
     }
 
+    @Override
+    public boolean shouldCloseOnEsc() {
+        return false;
+    }
+
     private Map<String, String> getMods() {
-        // This map has to be generated at runtime, otherwise the config won't work.
-        Map<String, String> mods = new HashMap<>();
+        Map<String, String> mods = new LinkedHashMap<>();
 
         if (FTBChecker.CONFIG.chunks && !ModList.get().isLoaded("ftbchunks"))
             mods.put("FTB Chunks", "https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge/download/" + FTBChecker.CONFIG.versions.chunksVersion);
@@ -111,7 +97,19 @@ public class MissingModsScreen extends Screen {
             mods.put("FTB Backups 2", "https://www.curseforge.com/minecraft/mc-mods/ftb-backups-2/download/" + FTBChecker.CONFIG.versions.backupsVersion);
 
         if (FTBChecker.CONFIG.polyLib && !ModList.get().isLoaded("polylib"))
-            mods.put("FTB Backups 2", "https://www.curseforge.com/minecraft/mc-mods/polylib/download/" + FTBChecker.CONFIG.versions.polyLibVersion);
+            mods.put("PolyLib", "https://www.curseforge.com/minecraft/mc-mods/polylib/download/" + FTBChecker.CONFIG.versions.polyLibVersion);
+
+        for (String modEntry : FTBChecker.CONFIG.customMods.mods) {
+            String[] parts = modEntry.split("\\|", 3);
+            if (parts.length >= 3) {
+                String modId = parts[0].trim();
+                String displayName = parts[1].trim();
+                String downloadUrl = parts[2].trim();
+                if (!modId.isEmpty() && !ModList.get().isLoaded(modId)) {
+                    mods.put(displayName, downloadUrl);
+                }
+            }
+        }
 
         return mods;
     }
@@ -121,12 +119,6 @@ public class MissingModsScreen extends Screen {
         int buttonHeight = 20;
 
         addRenderableWidget(new Button.Builder(Component.literal(modName), button -> openWebPage(downloadLink)).bounds(x, y, buttonWidth, buttonHeight).build());
-    }
-
-    private void exit() {
-        FTBChecker.IGNORED = true;
-
-        Minecraft.getInstance().setScreen(new TitleScreen());
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
